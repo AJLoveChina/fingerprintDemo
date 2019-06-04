@@ -1,4 +1,8 @@
+import Fingerprint2 from 'fingerprintjs2'
+
 import canvasFP from './core/canvasFP'
+import webglFp from './core/webglFP'
+import audioFP from './core/audioFP'
 
 
 function log(info) {
@@ -10,9 +14,19 @@ function log(info) {
 
 
 setTimeout(function () {
+    Fingerprint2.get(function (components) {
+        console.log(components) // an array of components: {key: ..., value: ...}
+    });
+
+
     log("<h3>浏览器指纹组合实例：</h3>");
     log("<h3>记住需要延时一段时间之后再去获取浏览器的指纹，因为网页加载时候立即调用会偶发出现不准确的问题。</h3>");
     log("canvas fingerprint : " + canvasFP().hash);
+    log("webgl fingerprint : " + webglFp().hash);
+
+    audioFP().then(({hash}) => {
+        log("audio fingerprint : " + hash);
+    })
 }, 500);
 
 //

@@ -14,3 +14,8 @@ npm run dev
 # How to build ?
 npm run build
 ```
+
+### 每个指纹算法的JS源文件
+[audio指纹 查看源码](./src/core/audioFP.js)
+[canvas指纹 查看源码](./src/core/canvasFP.js)
+[webgl指纹 查看源码](./src/core/webglFP.js)

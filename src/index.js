@@ -27,10 +27,17 @@ setTimeout(function () {
     log("<h3>同时我写了一篇 <a href='https://zhuanlan.zhihu.com/p/67923680'>知乎文章</a> 链接介绍了浏览器的属性检测话题</h3>");
     log("<h3>记住如果你在产线环境使用指纹来辨别用户的唯一性，一定要知道这些指纹数据不是百分之百准确的！或者说不是百分之百唯一的！而且单个指纹发生碰撞的几率比较高。<b>什么是碰撞？</b>碰撞就是美国有个用户浏览器的canvas指纹与某个在中国的用户的canvas指纹是相同的。</h3>")
 
+    let canvasStartTime = + new Date();
     log("canvas fingerprint : " + canvasFP().hash);
+    console.log(`canvas fp generate time ${+ new Date() - canvasStartTime}`);
+   
+    let webglStartTime = + new Date();
     log("webgl fingerprint : " + webglFp().hash);
+    console.log(`webgl fp generate time ${+ new Date() - webglStartTime}`);
 
+    let audioStartTime = + new Date();
     audioFP().then(({hash}) => {
+        console.log(`audio generate time : ${+ new Date  - audioStartTime }`)
         log("audio fingerprint : " + hash);
     })
 }, 500);

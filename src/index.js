@@ -3,6 +3,7 @@ import Fingerprint2 from 'fingerprintjs2'
 import canvasFP from './core/canvasFP'
 import webglFp from './core/webglFP'
 import audioFP from './core/audioFP'
+import netFP from './core/netFP'
 
 
 function log(info) {
@@ -29,16 +30,19 @@ setTimeout(function () {
 
     let canvasStartTime = + new Date();
     log("canvas fingerprint : " + canvasFP().hash);
-    console.log(`canvas fp generate time ${+ new Date() - canvasStartTime}`);
-   
+    console.log(`canvas fp generate time ${+ new Date() - canvasStartTime} ms`);
+
     let webglStartTime = + new Date();
     log("webgl fingerprint : " + webglFp().hash);
-    console.log(`webgl fp generate time ${+ new Date() - webglStartTime}`);
+    console.log(`webgl fp generate time ${+ new Date() - webglStartTime} ms`);
 
     let audioStartTime = + new Date();
     audioFP().then(({hash}) => {
-        console.log(`audio generate time : ${+ new Date  - audioStartTime }`)
+        console.log(`audio generate time : ${+ new Date  - audioStartTime } ms`)
         log("audio fingerprint : " + hash);
+    })
+    netFP().then(offer => {
+        log("rtcpeerconnection offer", offer);
     })
 }, 500);
 
